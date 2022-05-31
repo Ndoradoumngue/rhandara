@@ -1,0 +1,125 @@
+{% extends 'main_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+	{% for companyData in companyDetails %}
+
+      <!-- Jumbotron -->
+      <div class="jumbotron jumbotron-fluid" data-center="background-size: 100%;"
+         data-top-bottom="background-size: 110%;">
+         <div class="container" >
+            <!-- jumbo-heading -->
+            <div class="jumbo-heading" data-aos="fade-up">
+               <h1>Rapports</h1>
+               <!-- Breadcrumbs -->
+               <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                     <li class="breadcrumb-item"><a href="{% url 'mainAppNamespace:AboutUsName' %}">Accueil</a></li>
+                     <li class="breadcrumb-item active" aria-current="page">Rapport</li>
+                  </ol>
+               </nav>
+               <!-- /breadcrumb -->
+            </div>
+            <!-- /jumbo-heading -->
+         </div>
+         <!-- /container -->
+      </div>
+      <!-- /jumbotron -->
+      <!-- ==== Page Content ==== -->
+      <div id="blog-home" class="page">
+         <div class="container">
+            <div class="row">
+               <!-- Blog Entries Column -->
+               <div class="col-lg-12 page-with-sidebar">
+                  <div class="row">
+
+                     {% for rapport in reportsList %}
+
+                        <div class="col-lg-4 res-margin">
+                           <!-- blog-box -->
+                           <div class="blog-box">
+                              <!-- image -->
+                              <a href="#">
+                                 <div class="image"><img src="{{rapport.image.url}}" alt=""/></div>
+                              </a>
+                              <!-- blog-box-caption -->
+                              <div class="blog-box-caption">
+                                 <a href="blog-single.html">
+                                    <h5 style="font-size: 1.2rem !important;">{{rapport.title}}</h5>
+                                 </a>
+                                 <!-- /link -->
+                                 <p>
+                                    {{rapport.short_description}}
+                                 </p>
+                              </div>
+                              <!-- blog-box-footer -->
+                              <div class="blog-box-footer">
+                                 <!-- <div class="author">Par <a href="#"><i class="fas fa-user"></i>{{rapport.posted_by.first_name}} {{rapport.posted_by.last_name}}</a></div> -->
+                                 <!-- <div class="comments"><a href="blog-single.html"><i class="fas fa-comment"></i>23</a></div> -->
+                                 <!-- Button -->    
+                                 <div class="text-center col-md-12">
+                                    <a href="{{rapport.file.url}}" class="btn btn-primary ">Télécharger </a>
+                                 </div>
+                              </div>
+                              <!-- /blog-box-footer -->
+                           </div>
+                           <!-- /blog-box -->
+                        </div>
+
+                     {% endfor %}
+
+                  </div>
+
+                  {% if reportsList.has_other_pages %}
+
+                   <div class="col-md-12 mt-5">
+                       <!-- pagination -->
+
+                       <ul class="pagination">
+
+                           {% if reportsList.has_previous %}
+                              <li class="page-item">
+                                 <a href="?page={{ reportsList.previous_page_number }}" class="page-link" aria-label="Previous">
+                                 <span aria-hidden="true">&laquo;</span>
+                                 </a>
+                              </li>
+                           {% endif %}
+
+                           {% for i in reportsList.paginator.page_range %}
+                              {% if reportsList.number == i %}
+                                 <li class="page-item"><a class="page-link active" href="#">{{ i }}</a></li>
+                              {% else %}
+                                 <li class="page-item"><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
+                              {% endif %}
+                           {% endfor %}
+
+                           {% if reportsList.has_next %}
+
+                              <li class="page-item">
+                                 <a href="?page={{ reportsList.next_page_number }}" class="page-link" aria-label="Next">
+                                 <span aria-hidden="true">&raquo;</span>
+                                 </a>
+                              </li>
+
+                           {% endif %}
+
+                       </ul>
+
+                   </div>
+
+               {% endif %}
+
+               </div>
+               <!-- /page-with-sdiebar -->
+
+            </div>
+            <!-- /.row -->
+         </div>
+         <!-- /.container -->
+      </div>
+
+	{% endfor %}
+	
+{% endblock %}

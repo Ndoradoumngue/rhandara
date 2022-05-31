@@ -1,0 +1,70 @@
+{% extends 'main_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+	{% for companyData in companyDetails %}
+
+			<!-- Theme Inner Banner ____________________________ -->
+			<section>
+				<div class="Theme-Inner-Banner inner-banner-bg-img-one">
+					<div class="banner-opacity">
+						<div class="container">
+							<div class="banner-content">
+								<h1>Gallerie</h1>
+								<p>Découvrez-nous en images</p>
+								<ul>
+									<li><a href="{% url 'mainAppNamespace:HomeName' %}">Accueil</a></li>
+									<li><span>-</span></li>
+									<li><a href="#">Gallerie</a></li>
+								</ul>
+							</div> <!-- /.banner-content -->
+						</div> <!-- /.container -->
+					</div> <!-- /.banner-opacity -->
+				</div> <!-- /.Theme-Inner-Banner -->
+			</section>
+
+			<!-- Gallery ____________________________ -->
+			<section class="margin-top">
+				<div class="Gallery-Wrapper container">
+					<div class="mixitUp_menu">
+						<ul>
+							<li class="filter tran3s" data-filter="all"> Toutes les images</li>
+
+							{% for category in ourGalleryCategory %}
+								<li class="filter tran3s" data-filter=".{{category.slug}}">{{category.category}}</li>
+							{% endfor %}
+
+						</ul>
+					</div> <!-- End of .mixitUp_menu -->
+
+					<div class="gallery_item_wrapper row" id="mixitup_list">
+
+						{% for image in ourGallery %}
+
+							<!-- Single Item -->
+							<div class="col-sm-6 col-xs-12 mix {{image.category.slug}}">
+								<div class="portfolio-item gallery-image">
+									<img class="" src="{{image.image.url}}" alt="{{image.title}}">
+									<div class="item-opacity">
+										<div class="text-center">
+											<h6>{{image.title}}</h6>
+											<ul>
+												<li><a data-fancybox="gallery" href="{{image.image.url}}" class="tran3s zoom-view" data-caption="Strong Apollo"><i class="flaticon-photo"></i></a></li>
+												<!-- <li><a href="#"><i class="flaticon-arrow-curve-pointing-to-right"></i></a></li> -->
+											</ul>
+										</div> <!-- /.text-center -->
+									</div> <!-- /.item-opacity -->
+								</div> <!-- /.portfolio-item -->
+							</div> <!-- /.col -->
+
+						{% endfor %}
+
+					</div> <!-- / .row /#mixitup_list -->
+				</div> <!-- /.Gallery-Wrapper -->
+			</section> <!-- /.margin-top -->
+
+	{% endfor %}
+	
+{% endblock %}

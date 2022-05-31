@@ -1,0 +1,274 @@
+{% extends 'main_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+	{% for companyData in companyDetails %}
+
+		{% for event in eventData %}
+
+
+			<!-- Theme Inner Banner ____________________________ -->
+			<section>
+				<div class="Theme-Inner-Banner inner-banner-bg-img-one">
+					<div class="banner-opacity">
+						<div class="container">
+							<div class="banner-content">
+								<h1>Evénement</h1>
+								<p>{{event.title}}</p>
+								<ul>
+									<li><a href="{% url 'mainAppNamespace:HomeName' %}">Accueil</a></li>
+									<li><span>-</span></li>
+									<li><a href="#">Details D'Evénement</a></li>
+								</ul>
+							</div> <!-- /.banner-content -->
+						</div> <!-- /.container -->
+					</div> <!-- /.banner-opacity -->
+				</div> <!-- /.Theme-Inner-Banner -->
+			</section>
+
+			<!-- Event-Details-Pages ____________________________ -->
+			<section class="Event-Details-Pages">
+				<div class="container">
+					<div class="Rcent-Causes-Item-Wrapper Causes-Details-Wrapper">
+						<div class="row">
+							<div class="col-md-8 col-xs-12 margin-top">
+								<div class="Causes-Item Causes-Details-Item clear-fix">
+									<div class="Causes-Img"><img src="{{event.image.url}}" alt="image"></div> <!-- /.Causes-Img -->
+									<div class="Causes-Text">
+
+										{% if eventPassed == 'false' %}
+
+											<ul class="count-down">
+												<li>
+													<span>{{daysToEvent}}</span>
+													<p>Jours</p>
+												</li>
+												<li>
+													<span>{{hoursToEvent}}</span>
+													<p>Heures</p>
+												</li>
+												<li>
+													<span>{{minutesToEvent}}</span>
+													<p>Minutes</p>
+												</li>
+												<li>
+													<span>00</span>
+													<p>Seconds</p>
+												</li>
+											</ul>
+
+										{% endif %}
+
+										<ul class="Wacker-Drive">
+											<li><i class="fa fa-map-marker" aria-hidden="true"></i> {{event.venue}}</li>
+											<li><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+												Du {{event.from_datetime | date:'d'}} 
+							                	{% if event.from_datetime.month == 1 or event.from_datetime.month == '1' %}
+													Janvier
+												{% elif event.from_datetime.month == 2 or event.from_datetime.month == '2' %}
+													Février
+												{% elif event.from_datetime.month == 3 or event.from_datetime.month == '3' %}
+													Mars
+												{% elif event.from_datetime.month == 4 or event.from_datetime.month == '4' %}
+													Avril
+												{% elif event.from_datetime.month == 5 or event.from_datetime.month == '5' %}
+													Mai
+												{% elif event.from_datetime.month == 6 or event.from_datetime.month == '6' %}
+													Juin
+												{% elif event.from_datetime.month == 7 or event.from_datetime.month == '7' %}
+													Juillet
+												{% elif event.from_datetime.month == 8 or event.from_datetime.month == '8' %}
+													Août
+												{% elif event.from_datetime.month == 9 or event.from_datetime.month == '9' %}
+													Septembre
+												{% elif event.from_datetime.month == 10 or event.from_datetime.month == '10' %}
+													Octobre
+												{% elif event.from_datetime.month == 11 or event.from_datetime.month == '11' %}
+													Novembre
+												{% elif event.from_datetime.month == 12 or event.from_datetime.month == '11' %}
+													Décembre
+												{% else %}
+												{% endif %}
+							                 {{event.from_datetime | date:'Y'}}, {{ event.from_datetime|date:'H:i' }} au {{event.to_datetime | date:'d'}} 
+
+							                 {% if event.to_datetime.month == 1 or event.to_datetime.month == '1' %}
+													Janvier
+												{% elif event.to_datetime.month == 2 or event.to_datetime.month == '2' %}
+													Février
+												{% elif event.to_datetime.month == 3 or event.to_datetime.month == '3' %}
+													Mars
+												{% elif event.to_datetime.month == 4 or event.to_datetime.month == '4' %}
+													Avril
+												{% elif event.to_datetime.month == 5 or event.to_datetime.month == '5' %}
+													Mai
+												{% elif event.to_datetime.month == 6 or event.to_datetime.month == '6' %}
+													Juin
+												{% elif event.to_datetime.month == 7 or event.to_datetime.month == '7' %}
+													Juillet
+												{% elif event.to_datetime.month == 8 or event.to_datetime.month == '8' %}
+													Août
+												{% elif event.to_datetime.month == 9 or event.to_datetime.month == '9' %}
+													Septembre
+												{% elif event.to_datetime.month == 10 or event.to_datetime.month == '10' %}
+													Octobre
+												{% elif event.to_datetime.month == 11 or event.to_datetime.month == '11' %}
+													Novembre
+												{% elif event.to_datetime.month == 12 or event.to_datetime.month == '11' %}
+													Décembre
+												{% else %}
+												{% endif %}
+
+							                  {{event.to_datetime | date:'Y'}}, {{ event.to_datetime|date:'H:i' }}
+
+											</li>
+										</ul>
+										<ul class="Look-Event">
+											<li><i class="fa fa-home" aria-hidden="true"></i> Inscrits: {{numberOfRegisteredParticipants}} sur {{event.seats_limit}} places</li>
+											<li><a href="{% url 'mainAppNamespace:RegistrationToAnEventName' event_slug=event.slug %}">S'inscrire </a></li>
+										</ul>
+									</div> <!-- /.Causes-Text -->
+								</div> <!-- /.Causes-Item -->
+								<div class="Details-Info">
+									<h3>{{event.title}}</h3>
+									<p>{{event.description | safe}}</p>
+								</div> <!-- /.Details-Info -->
+								<div class="Admin-Text">
+									<img src="{{event.formateur.profile_image.url}}" alt="image">
+									<div class="Text">
+										<div class="clearfix">
+											<div class="float-left">
+												<h6>{{event.formateur.first_name}} {{event.formateur.last_name}}</h6>
+												{% if event.formateur.is_male == True %}
+													<h7>Formateur</h7>
+												{% else %}
+													<h7>Formatrice</h7>
+												{% endif %}
+											</div>
+											<ul class="float-right">
+												<li><a href="{{event.formateur.facebook_profile_link}}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+							                    <li><a href="{{event.formateur.twitter_profile_link}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+							                    <li><a href="{{event.formateur.linkedin_profile_link}}" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+											</ul>
+										</div> <!-- /.clearfix -->
+										<p>{{event.formateur.brief_bio}}</p>
+									</div> <!-- /.Text -->
+								</div> <!-- /.Admin-Text -->
+								<div class="Three-Comments-Section">
+									<h4>Commentaires ({{numberOfEventComments}})</h4>
+									<ul>
+
+										{% for comment in eventComments %}
+
+											<li>
+												<div class="Comments-Item">
+
+													{% if comment.commented_by.profile_image == None %}
+														<img src="{% static 'main_app/images/logo/theme-main-logo-1.png' %}" alt="image">
+													{% else %}
+														<img src="{{comment.commented_by.profile_image.url}}" alt="image">
+													{% endif %}
+
+													<h6>{{comment.commented_by.first_name}} {{comment.commented_by.last_name}}</h6>
+													<span> {{comment.added_on_date_time}} </span>
+													<p>{{comment.comment}}</p>
+												</div> <!-- /.Comments-Item -->
+											</li> <!-- /li -->
+
+										{% endfor %}
+
+									</ul> <!-- /ul -->
+								</div> <!-- /.Three-Comments-Section -->
+								<div class="Leave-A-Comment">
+									<h4>Commenter</h4>
+									<form action="" method="post">
+										{% csrf_token %}
+										<div class="row">
+											<div class="col-xs-12"><textarea placeholder="Commentaire" name="comment" required=""></textarea></div>
+											<!-- <div class="col-sm-4 col-xs-12"><input type="text" placeholder="Your Name"></div>
+											<div class="col-sm-4 col-xs-12"><input type="email" placeholder="Email"></div>
+											<div class="col-sm-4 col-xs-12"><input type="text" placeholder="Phone"></div> -->
+											<div class="col-xs-12"><button class="hvr-float-shadow">Poster</button></div>
+											<br/><Br/>
+										</div> <!-- /.row -->
+									</form> <!-- /form -->
+								</div> <!-- /.Leave-A-Comment -->
+							</div> <!-- /.col -->
+
+							<!-- ================ Right Side Bar ================== -->
+							<div class="col-md-4 col-xs-12">
+								<div class="Right-Side-Bar">
+									<!-- <form action="#" class="Side-Search">
+										<input type="text" placeholder="Search">
+										<button><i class="fa fa-search" aria-hidden="true"></i></button>
+									</form> -->									
+
+									<div class="Side-Upcoming-Events">
+										<h5>Evénements A Venir</h5>
+										<ul>
+
+											{% for event in upcomingEvents %}
+
+												<li>
+													{% if event.image == None %}
+														<img src="{% static 'main_app/images/logo/logo.png' %}" alt="image">
+													{% else %}
+														<img src="{{event.image.url}}" alt="image">
+													{% endif %}
+													<div class="text">
+														<h6><a href="{% url 'mainAppNamespace:EventDetailsName' event_slug=event.slug %}">{{event.title}}</a></h6>
+														<span>{{event.from_datetime}} ({{event.venue}})</span>
+													</div>
+												</li>
+
+											{% endfor %}
+
+										</ul>
+									</div> <!-- /.Side-Upcoming-Events -->
+									<div class="Side-Our-Programs">
+										<h5>Nos Programmes</h5>
+										<ul>
+
+											{% for cause in ourcause %}
+
+												<li><a href="{% url 'mainAppNamespace:EventsName' %}?cause={{cause.slug}}"><i class="fa fa-arrow-right" aria-hidden="true"></i> {{cause.title}}</a></li>
+
+											{% endfor %}											
+
+										</ul>
+									</div> <!-- /.Side-Our-Programs -->
+									<div class="Side-Recent-News-Post">
+										<h5>Evénements Récents</h5>
+										<ul>
+
+											{% for event in recentEvents %}
+
+												<li>
+													<img src="{{event.image.url}}" alt="image">
+													<div class="text">
+														<h6><a href="{% url 'mainAppNamespace:EventDetailsName' event_slug=event.slug %}">{{event.title}}</a></h6>
+														<span>{{event.from_datetime}} ({{event.venue}})</span>
+													</div>
+												</li>
+
+											{% endfor %}
+
+										</ul>
+									</div> <!-- /.Side-Recent-News-Post -->
+
+
+								</div> <!-- /.Right-Side-Bar -->
+							</div> <!-- /.col -->
+
+						</div> <!-- /.row -->
+					</div> <!-- /.Rcent-Causes-Item-Wrapper -->
+				</div> <!-- /.container -->
+			</section> <!-- /.Event-Details-Pages -->
+			
+		{% endfor %}
+
+	{% endfor %}
+	
+{% endblock %}

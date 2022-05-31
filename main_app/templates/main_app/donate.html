@@ -1,0 +1,103 @@
+{% extends 'main_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+	{% for companyData in companyDetails %}
+
+			<!-- Theme Inner Banner ____________________________ -->
+			<section>
+				<div class="Theme-Inner-Banner inner-banner-bg-img-one">
+					<div class="banner-opacity">
+						<div class="container">
+							<div class="banner-content">
+								<h1>Faire Un Don</h1>
+								<p>Merci de nous soutenir à faire avancer les femmes dans la TIC</p>
+								<ul>
+									<li><a href="{% url 'mainAppNamespace:HomeName' %}">Accueil</a></li>
+									<li><span>-</span></li>
+									<li><a href="#">Faire Un Don</a></li>
+								</ul>
+							</div> <!-- /.banner-content -->
+						</div> <!-- /.container -->
+					</div> <!-- /.banner-opacity -->
+				</div> <!-- /.Theme-Inner-Banner -->
+			</section>
+
+			<!-- Join Volunteer ____________________________ -->
+			<section class="Join-Volunteer-Pages">
+				<div class="container">
+					<div class="Theme-title text-center">
+						{% if causeSelected == 'true' %}
+							{% for cause in ourCause %}
+								<h2> FAIRE UN DON </h2>
+								<h6> {{cause.title}} </h6>
+							{% endfor %}
+						{% else %}
+							<h2> FAIRE UN DON </h2>
+							<h6> Merci De Bien Vouloir Nous Soutenir </h6>
+						{% endif %}
+					</div>
+					<form action="" method="post">
+                    {% csrf_token %}
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="single-input">
+									<input type="text" placeholder=" Nom *" name="first_name" required="">
+								</div> <!-- /.single-input -->
+							</div> <!-- /.col -->
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="single-input">
+									<input type="text" placeholder=" Prénom *" name="last_name" required="">
+								</div> <!-- /.single-input -->
+							</div> <!-- /.col -->
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="single-input">
+									<input type="email" placeholder="Email *" name="email" required="">
+								</div> <!-- /.single-input -->
+							</div> <!-- /.col -->
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="single-input">
+									<input type="text" placeholder="Téléphone *" name="tel">
+								</div> <!-- /.single-input -->
+							</div> <!-- /.col -->
+
+							{% if causeSelected == 'true' %}
+
+								{% for cause in ourCause %}
+									<input type="hidden" name="cause" value="{{cause.slug}}">	
+								{% endfor %}															
+
+							{% else %}
+
+								<div class="col-xs-12">
+									<div class="single-input">
+										<select class="selectpicker" name="cause">
+											<option value="">Veillez choisir une cause</option>
+											<option value="">Général</option>
+
+											{% for cause in ourCause %}
+												<option value="{{cause.slug}}">{{cause.title}}</option>
+											{% endfor %}
+										</select>
+									</div> <!-- /.single-input -->
+								</div> <!-- /.col -->
+
+							{% endif %}
+
+							<div class="col-xs-12">
+								<div class="single-textarea">
+									<textarea placeholder="Avez-vous un message? ...." name="message"></textarea>
+								</div> <!-- /.single-textarea -->
+							</div> <!-- /.col -->
+						</div> <!-- /.row -->
+						<button class="hvr-float-shadow">Envoyer</button>
+						<br/><br/>
+					</form> <!-- /Form -->
+				</div> <!-- /.container -->
+			</section> <!-- /.Join-Volunteer-Pages -->
+			
+	{% endfor %}
+	
+{% endblock %}

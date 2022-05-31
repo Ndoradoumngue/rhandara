@@ -1,0 +1,112 @@
+{% extends 'main_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+	{% for companyData in companyDetails %}
+
+		<!-- Jumbotron -->
+		<div class="jumbotron jumbotron-fluid" data-center="background-size: 100%;"
+		   data-top-bottom="background-size: 110%;">
+		   <div class="container" >
+		      <div class="jumbo-heading" data-aos="fade-up">
+		         <h1>Nos produits</h1>
+		         <!-- Breadcrumbs -->
+		         <nav aria-label="breadcrumb">
+		            <ol class="breadcrumb">
+		               <li class="breadcrumb-item"><a href="{% url 'mainAppNamespace:HomeName' %}">Accueil</a></li>
+		               <li class="breadcrumb-item active" aria-current="page">Nos produits </li>
+		            </ol>
+		         </nav>
+		      </div>
+		   </div>
+		   <!-- /jumbo-heading -->
+		</div>
+		<!-- /jumbotron -->
+		<!-- ==== Page Content ==== -->
+		<div class="page container">
+		   <!-- Gallery -->
+		   <div id="gallery-isotope" class="row row-eq-height mt-lg-5">
+
+		   	{% for product in ourProductList %}
+
+		      <!-- Adopt 1 -->
+		      <div class="dogs col-lg-4">
+		         <div class="isotope-item">
+		            <div class="adopt-card res-margin row bg-light pattern2">
+		               <div class="col-md-5">
+		                  <!-- Image -->
+		                  <div class="adopt-image d-flex flex-wrap align-items-center ">
+		                     <a href="{% url 'mainAppNamespace:OpportunityName' opportunity_slug=product.slug %}">
+		                     <img src="{{product.image.url}}" class="img-fluid" alt="">
+		                     </a>
+		                  </div>
+		               </div>
+		               <div class="col-md-7 res-margin">
+		                  <!-- Name -->
+		                  <div class="caption-adoption">
+		                     <h5 class="adoption-header" style="font-size: 1.2rem !important; margin-top: -1px !important;"><a href="{% url 'mainAppNamespace:OpportunityName' opportunity_slug=product.slug %}">{{product.title}}</a></h5>
+		                     <!-- List -->
+		                     <ul class="list-unstyled">
+		                        <li><strong>Prix:</strong> {{product.price}}</li>
+		                     </ul>
+                     		<a href="{% url 'mainAppNamespace:OpportunityName' opportunity_slug=product.slug %}" class="btn btn-primary" style="font-size: 0.9rem !important; padding: 10px 20px !important;">Voir Details</a>
+		                  </div>
+		               </div>
+		               <!-- /col-md -->
+		            </div>
+		            <!-- /adopt-card -->
+		         </div>
+		         <!-- /isotope-item--> 
+			    </div>
+			    <!-- /col-lg- --> 
+
+		      {% endfor %}
+
+		   </div>
+
+		   {% if ourProductList.has_other_pages %}
+
+                <div class="col-md-12 mt-5">
+                    <!-- pagination -->
+
+                    <ul class="pagination">
+
+                        {% if ourProductList.has_previous %}
+                           <li class="page-item">
+                              <a href="?page={{ ourProductList.previous_page_number }}" class="page-link" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                              </a>
+                           </li>
+                        {% endif %}
+
+                        {% for i in ourProductList.paginator.page_range %}
+                           {% if ourProductList.number == i %}
+                              <li class="page-item"><a class="page-link active" href="#">{{ i }}</a></li>
+                           {% else %}
+                              <li class="page-item"><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
+                           {% endif %}
+                        {% endfor %}
+
+                        {% if ourProductList.has_next %}
+
+                           <li class="page-item">
+                              <a href="?page={{ ourProductList.next_page_number }}" class="page-link" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                              </a>
+                           </li>
+
+                        {% endif %}
+
+                    </ul>
+
+                </div>
+
+            {% endif %}
+
+		</div>
+
+	{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'main_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+	{% for companyData in companyDetails %}
+
+			<!-- Theme Inner Banner ____________________________ -->
+			<section>
+				<div class="Theme-Inner-Banner inner-banner-bg-img-one">
+					<div class="banner-opacity">
+						<div class="container">
+							<div class="banner-content">
+								<h1>Nos Partenaires</h1>
+								<p>Découvrez les organizations impressionnates qui nous aident renforcer la présence des filles dans les TICs ({{numberOfOurPartners}})</p>
+								<ul>
+									<li><a href="{% url 'mainAppNamespace:HomeName' %}">Accueil</a></li>
+									<li><span>-</span></li>
+									<li><a href="#">Nos Partenaires</a></li>
+								</ul>
+							</div> <!-- /.banner-content -->
+						</div> <!-- /.container -->
+					</div> <!-- /.banner-opacity -->
+				</div> <!-- /.Theme-Inner-Banner -->
+			</section>
+
+			<!-- Shop ____________________________ -->
+			<section class="Shop-Pages">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12 col-md-8 col-xs-12 float-right">
+							<div class="Shop-Item-Wrapper">
+								<div class="row">
+
+									{% for partner in listOfOurPartners %}
+
+										<div class="col-lg-4 col-xs-6 Shop-Item-Width">
+											<div class="Shop-Item">
+												<div class="Shop-Img partners-list-item">
+													<img src="{{partner.company_logo.url}}" alt="image">
+												</div> <!-- /.Shop-Img -->
+												<div class="Shop-Cart">
+													<h6><a href="{{partner.profile_website_link}}" target="_blank">{{partner.company_name}}</a></h6>
+												</div> <!-- /.Shop-Cart -->
+											</div> <!-- /.Shop-Item -->
+										</div> <!-- /.col -->									
+
+									{% endfor %}
+
+								</div> <!-- /.row -->
+							</div> <!-- /.Shop-Item-Wrapper -->
+						</div> <!-- /.col -->
+
+					</div> <!-- /.row -->
+				</div> <!-- /.container -->
+			</section> <!-- /.Shop-Pages -->
+
+	{% endfor %}
+	
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'main_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+	{% for companyData in companyDetails %}
+
+		{% for product in productDetails %}
+
+         <!-- Jumbotron -->
+         <div class="jumbotron jumbotron-fluid" data-center="background-size: 100%;"
+            data-top-bottom="background-size: 110%;">
+            <div class="container" >
+               <div class="jumbo-heading" data-aos="fade-up">
+                 <!-- jumbo-heading -->
+                <h1>Produit</h1>
+                  <!-- Breadcrumbs -->
+                  <nav aria-label="breadcrumb">
+                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'mainAppNamespace:AboutUsName' %}">Accueil</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'mainAppNamespace:OpportunitiesName' %}">Nos Produits</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{product.title}}</li>
+                     </ol>
+                  </nav>
+                  <!-- /breadcrumb -->
+               </div>
+               <!-- /jumbo-heading -->
+            </div>
+            <!-- /container -->
+         </div>
+         <!-- /jumbotron -->
+         <!-- ==== Page Content ==== -->
+         <div class="page">
+            <div class="container">
+               <h2>{{product.title}}</h2>
+               <div class="row mt-4">
+                  <!-- event INFO -->  
+                  <div class="col-lg-5">
+                     <!-- image event --> 
+                     <img class="img-fluid rounded" src="{{product.image.url}}" alt=""/>
+                  </div>
+                  <div class="col-lg-7">
+                     <!-- list -->
+                     <ul class="list-unstyled colored-icons font-weight-bold res-margin">
+                        <li><span><i class="fa fa-money mr-2"></i>{{product.price}}</span></li>
+                        <!-- <li><span><i class="fas fa-map-marker-alt mr-2"></i>Washington Square Park</span></li> -->
+                     </ul>
+                     <p>
+                        {{product.description | safe}}                     
+                     </p>
+                     <!-- Button -->   
+                     <!-- <a href="contact.html" class="btn btn-primary mt-2">Contact us</a> -->
+                  
+                  </div>
+                  <!-- col-lg-7 --> 
+               </div>
+               <!-- /row -->
+               <!-- map-->
+               <!-- <div id="map-canvas" class="mt-5 map-small-height"></div> -->
+              <!-- custom link -->
+            <!--  <a class="custom-link  mt-5" href="events.html">Go back to Events page</a> -->
+            </div>
+            <!-- /container -->
+         </div>
+         <!-- /page -->
+
+      {% endfor %}
+
+	{% endfor %}
+
+{% endblock %}

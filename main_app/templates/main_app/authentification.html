@@ -1,0 +1,96 @@
+{% extends 'main_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+	{% for companyData in companyDetails %}
+
+			<!-- Theme Inner Banner ____________________________ -->
+			<section>
+				<div class="Theme-Inner-Banner inner-banner-bg-img-one">
+					<div class="banner-opacity">
+						<div class="container">
+							<div class="banner-content">
+								<h1>Se Connecter</h1>
+								<p>Rejoignez notre reseau d'impressionantes personnes</p>
+								<ul>
+									<li><a href="{% url 'mainAppNamespace:HomeName' %}">Accueil</a></li>
+									<li><span>-</span></li>
+									<li><a href="#">Se Connecter</a></li>
+								</ul>
+							</div> <!-- /.banner-content -->
+						</div> <!-- /.container -->
+					</div> <!-- /.banner-opacity -->
+				</div> <!-- /.Theme-Inner-Banner -->
+			</section>
+
+			<!-- You Can Bring ____________________________ -->
+			<section class="You-Can-Bring">
+				<div class="You-Can-Bring-Title">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-5 col-sm-6 col-xs-12">
+								<h3>Rejoignez-nous</h3>
+							</div> <!-- /.col -->
+							<div class="col-lg-7 col-sm-6 col-xs-12">
+								<p>Connectez-vous ou créez un compte pour recevoir nos mises a jour et prendre part a nos activités.</p>
+							</div> <!-- /.col -->
+						</div> <!-- /.row -->
+					</div> <!-- /.container -->
+				</div> <!-- /.You-Can-Bring-Title -->
+				<div class="You-Can-Bring-Item-Wrapper Bring-Item-Wrapper-V-Two">
+					<div class="row">
+
+						<div class="col-md-6 col-sm-12">
+							<div class="Bring-Item text-center">
+								<h3>SE CONNECTER</h3>
+
+								<form action="" method="post">
+									{% csrf_token %}
+
+									<input class="new-input" type="email" placeholder=" Addresse Email *" name="loginEmail" required="">
+									<br/><br/>
+									<input class="new-input" type="password" placeholder=" Mot De Passe *" name="loginPassword" required="">
+									<br/><br/>
+
+									<button type="submit" class="new-submit-button">Se Connecter</button>
+									<br/><Br/>
+									<h6 style="color: #fff !important;">Vous avez oublié votre mot de passe? Contactez-nous pour le recupérer.</h6>
+									<br/><Br/><br/><Br/><br/><Br/>
+									<div style="padding-bottom: 25px !important;"></div>
+								</form>
+							</div> <!-- /.Bring-Item -->
+						</div> <!-- /.col -->
+
+						<div class="col-md-6 col-sm-12">
+							<div class="Bring-Item bring-item-bg-two text-center">
+								<h3> CREER UN COMPTE </h3>
+								<form action="" method="post">
+									{% csrf_token %}
+
+									<input class="new-input" type="text" placeholder=" Nom *" name="firstName" required="">
+									<br/><br/>
+									<input class="new-input" type="text" placeholder=" Prenom *" name="lastName" required="">
+									<br/><br/>
+									<input class="new-input" type="text" placeholder=" Numero De Téléphone *" name="tel" required="">
+									<br/><br/>
+									<input class="new-input" type="email" placeholder=" Email *" name="registerEmail" required="">
+									<br/><br/>
+									<input class="new-input" type="password" placeholder=" Mot De Passe *" name="password" required="">
+									<br/><br/>
+									<input class="new-input" type="password" placeholder=" Vérifiez Mot De Passe *" name="passwordConfirmation" required="">
+									<br/><br/>
+
+									<button type="submit" class="new-submit-button">S'enregistrer </button>
+								</form>
+							</div> <!-- /.Bring-Item -->
+						</div> <!-- /.col -->
+
+					</div> <!-- /.row -->
+				</div> <!-- /.You-Can-Bring-Item-Wrapper -->
+			</section> <!-- /.You-Can-Bring -->
+			<br/><br/>
+	{% endfor %}
+	
+{% endblock %}

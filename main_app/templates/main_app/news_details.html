@@ -1,0 +1,100 @@
+{% extends 'main_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+	{% for companyData in companyDetails %}
+
+		{% for news in newsData %}
+
+         <!-- Jumbotron -->
+         <div class="jumbotron jumbotron-fluid" data-center="background-size: 100%;"
+            data-top-bottom="background-size: 110%;">
+            <div class="container" >
+               <!-- jumbo-heading -->
+               <div class="jumbo-heading" data-aos="fade-up">
+                  <h1>News</h1>
+                  <!-- Breadcrumbs -->
+                  <nav aria-label="breadcrumb">
+                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'mainAppNamespace:HomeName' %}">Accueil</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'mainAppNamespace:NewsName' %}">News</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{news.title}}</li>
+                     </ol>
+                  </nav>
+                  <!-- /breadcrumb -->
+               </div>
+               <!-- /jumbo-heading -->
+            </div>
+            <!-- /container -->
+         </div>
+         <!-- /jumbotron -->
+         <!-- ==== Page Content ==== -->
+         <div class="page">
+            <div class="container">
+               <div class="row">
+                  <!-- Post Content Column -->
+                  <div class="col-lg-12 blog-card page-with-sidebar">
+                     <h2 class="mb-2" style="font-size: 1.8rem !important;">{{news.title}}</h2>
+                     <!-- Preview Image -->
+                     <img src="{{news.image.url}}" class="img-fluid" alt="">
+                     <hr>
+                     <p>
+                        {{news.news | safe}}
+                     </p>
+
+                     <!-- Comments Form -->
+                     <!-- <div class="card my-4 mt-5 bg-light">
+                        <h5 class="card-header">Leave a Comment:</h5>
+                        <div class="card-body">
+                           <form>
+                              <div class="form-group">
+                                 <textarea class="form-control" rows="3"></textarea>
+                              </div>
+                              <button type="submit" class="btn btn-secondary">Submit</button>
+                           </form>
+                        </div>
+                     </div> -->
+
+                     <!-- Comment -->
+                     <!-- <div class="comment row mt-5">
+                        <div class="col-md-3 col-xs-12 comment-img text-center float-left">
+                           <img class="rounded-circle img-fluid m-x-auto" src="img/team/team1.jpg" alt="">
+                        </div>
+                        <div class="col-md-9 col-xs-12 float-right">
+                           <h6 class="mt-2"><a href="#">Luisa Smith</a> <small>says:</small></h6>
+                           <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                           <button type="submit" class="btn btn-primary btn-sm float-right">Reply</button>
+                        </div>
+                     </div> -->
+                     <!--/Comment -->
+
+                     <!-- Comment -->
+                     <!-- <div class="comment row">
+                        <div class="col-md-3 col-xs-12 comment-img text-center float-left">
+                           <img class="rounded-circle img-fluid m-x-auto" src="img/team/team2.jpg" alt="">
+                        </div>
+                        <div class="col-md-9 col-xs-12 float-right">
+                           <h6 class="mt-2"><a href="#">John Doe</a> <small>says:</small></h6>
+                           <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                           <button type="submit" class="btn btn-primary btn-sm float-right">Reply</button>
+                        </div>
+                     </div> -->
+                     <!--/Comment -->
+
+                  </div>
+                  <!-- /page-with-sidebar -->
+
+               </div>
+               <!-- /.row -->
+            </div>
+            <!-- /.container -->
+         </div>
+         <!-- /page -->
+
+      {% endfor %}
+
+	{% endfor %}
+
+{% endblock %}

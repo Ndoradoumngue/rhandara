@@ -1,0 +1,69 @@
+{% extends 'main_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+	{% for companyData in companyDetails %}
+
+			<!-- Theme Inner Banner ____________________________ -->
+			<section>
+				<div class="Theme-Inner-Banner inner-banner-bg-img-one">
+					<div class="banner-opacity">
+						<div class="container">
+							<div class="banner-content">
+								<h1>Nos causes </h1>
+								<p>Découvrez les causes de l'AEPF</p>
+								<ul>
+									<li><a href="{% url 'mainAppNamespace:HomeName' %}">Accueil</a></li>
+									<li><span>-</span></li>
+									<li><a href="#">Nos Causes</a></li>
+								</ul>
+							</div> <!-- /.banner-content -->
+						</div> <!-- /.container -->
+					</div> <!-- /.banner-opacity -->
+				</div> <!-- /.Theme-Inner-Banner -->
+			</section>
+
+			<!-- Rcent Causes ____________________________ -->
+			<section class="Rcent-Causes-Section padding-bottom-0">
+				<div class="container">
+					<div class="Rcent-Causes-Item-Wrapper">
+						<div class="row">
+
+							{% for cause in ourCause %}
+
+								<div class="col-md-4 col-sm-6 col-xs-12">
+									<div class="Causes-Item Causes-Item-margin">
+										<div class="Causes-Img"><img class="cause-img" src="{{cause.image.url}}" alt="image"></div> <!-- /.Causes-Img -->
+										<div class="Causes-Text">
+											<h3>{{cause.title}}</h3>
+											<ul>
+												<li>But</li>
+												<li>
+													<div class="donate-piechart tran3s">
+										                <div class="piechart"  data-border-color="rgba(253,88,11,1)" data-value=".{{cause.percentage_of_goal_reached}}">
+														  <span>.{{cause.percentage_of_goal_reached}}</span>
+														</div>
+										            </div> <!-- /.donate-piechart -->
+												</li>
+												<li>atteint</li>
+											</ul>
+											<p>{{cause.description | safe | truncatechars:120}}</p>
+											<a href="{% url 'mainAppNamespace:CauseDetailsName' cause_slug=cause.slug %}">Voire</a>
+										</div> <!-- /.Causes-Text -->
+									</div> <!-- /.Causes-Item -->
+								</div> <!-- /.col -->
+
+							{% endfor %}
+
+						</div> <!-- /.row -->
+
+					</div> <!-- /.Rcent-Causes-Item-Wrapper -->
+				</div> <!-- /.container -->
+			</section> <!-- /.Rcent-Causes-Section -->
+	
+	{% endfor %}
+	
+{% endblock %}
+

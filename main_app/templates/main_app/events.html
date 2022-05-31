@@ -1,0 +1,158 @@
+{% extends 'main_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+	{% for companyData in companyDetails %}
+
+			<!-- Theme Inner Banner ____________________________ -->
+			<section>
+				<div class="Theme-Inner-Banner inner-banner-bg-img-one">
+					<div class="banner-opacity">
+						<div class="container">
+							<div class="banner-content">
+								<h1>Nos Evénements</h1>
+								<p>{{eventsTitle}}</p>
+								<ul>
+									<li><a href="{% url 'mainAppNamespace:HomeName' %}">Accueil</a></li>
+									<li><span>-</span></li>
+									<li><a href="#">Evénements</a></li>
+								</ul>
+							</div> <!-- /.banner-content -->
+						</div> <!-- /.container -->
+					</div> <!-- /.banner-opacity -->
+				</div> <!-- /.Theme-Inner-Banner -->
+			</section>
+
+			<!-- Causes Sidebar ____________________________ -->
+			<section class="">
+				<div class="container">
+					<div class="Rcent-Causes-Item-Wrapper Causes-Sidebar-Wrapper">
+						<div class="row">
+							<div class="col-md-8 col-xs-12 margin-top">
+								
+								{% for event in eventsList %}
+							
+									<div class="Causes-Item Causes-Sidebar-Item Item-Events-List-Wrapper clear-fix">
+										<div class="Causes-Img Causes-Img-Date cause-list-image">
+											<img src="{{event.image_thumb.url}}" alt="image">
+											{% if event.upcoming == True or event.upcoming == 'True' or event.upcoming == true or event.upcoming == 'true' %}
+												<div class="Date green-background padding">
+													<p>A Venir</p>
+												</div> <!-- /.Date -->
+											{% else %}
+												<div class="Date padding">
+													<p>Passée</p>
+												</div> <!-- /.Date -->
+											{% endif %}
+										</div> <!-- /.Causes-Img -->
+										<div class="Causes-Text">
+											<h4> {{event.title | truncatechars:45}} </h4>
+											<p>{{event.brief_description | truncatechars:100}}</p>
+											<ul>
+												<li><i class="fa fa-clock-o" aria-hidden="true"></i> {{event.from_datetime}} </li>
+												<li><i class="fa fa-map-marker" aria-hidden="true"></i> {{event.venue}}</li>
+											</ul>
+											<a href="{% url 'mainAppNamespace:EventDetailsName' event_slug=event.slug %}">Vois Plus</a>
+										</div> <!-- /.Causes-Text -->
+									</div> <!-- /.Causes-Item -->
+							
+								{% endfor %}
+
+								{% if eventsList.has_other_pages %}
+
+									<ul class="number-next-and-pivias text-center">
+										
+										{% if eventsList.has_previous %}
+											<li><a href="?page={{ eventsList.previous_page_number }}"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></li>
+										{% endif %}
+
+										{% for i in eventsList.paginator.page_range %}
+											{% if eventsList.number == i %}
+			                            		<li><a class="primary-color ">{{ i }}</a></li>
+			                            	{% else %}
+			                            		<li><a href="?page={{ i }}">{{ i }}</a></li>
+			                            	{% endif %}
+										{% endfor %}
+
+										{% if eventsList.has_next %}
+											<li><a href="?page={{ eventsList.next_page_number }}"><i class="fa fa-arrow-right" aria-hidden="true"></i></a></li>
+										{% endif %}
+
+									</ul>
+
+								{% endif %}
+
+								<br/>
+							</div> <!-- /.col -->
+
+							<!-- ================ Right Side Bar ================== -->
+							<div class="col-md-4 col-xs-12">
+								<div class="Right-Side-Bar">
+									<!-- <form action="#" class="Side-Search">
+										<input type="text" placeholder="Search">
+										<button><i class="fa fa-search" aria-hidden="true"></i></button>
+									</form> -->
+									
+
+									<div class="Side-Upcoming-Events">
+										<h5>Evénements A Venir</h5>
+										<ul>
+
+											{% for event in upcomingEvents %}
+
+												<li>
+													<img src="{{event.image.url}}" alt="image">
+													<div class="text">
+														<h6><a href="{% url 'mainAppNamespace:EventDetailsName' event_slug=event.slug %}">{{event.title}}</a></h6>
+														<span>{{event.from_datetime}} ({{event.venue}})</span>
+													</div>
+												</li>
+
+											{% endfor %}
+
+										</ul>
+									</div> <!-- /.Side-Upcoming-Events -->
+									<div class="Side-Our-Programs">
+										<h5>Nos Programmes</h5>
+										<ul>
+
+											{% for cause in ourcause %}
+
+												<li><a href="{% url 'mainAppNamespace:EventsName' %}?cause={{cause.slug}}"><i class="fa fa-arrow-right" aria-hidden="true"></i> {{cause.title}}</a></li>
+
+											{% endfor %}											
+
+										</ul>
+									</div> <!-- /.Side-Our-Programs -->
+									<div class="Side-Recent-News-Post">
+										<h5>Evénements Récents</h5>
+										<ul>
+
+											{% for event in recentEvents %}
+
+												<li>
+													<img src="{{event.image.url}}" alt="image">
+													<div class="text">
+														<h6><a href="{% url 'mainAppNamespace:EventDetailsName' event_slug=event.slug %}">{{event.title}}</a></h6>
+														<span>{{event.from_datetime}} ({{event.venue}})</span>
+													</div>
+												</li>
+
+											{% endfor %}
+
+										</ul>
+									</div> <!-- /.Side-Recent-News-Post -->
+
+
+								</div> <!-- /.Right-Side-Bar -->
+							</div> <!-- /.col -->
+						</div> <!-- /.row -->
+					</div> <!-- /.Rcent-Causes-Item-Wrapper -->
+				</div> <!-- /.container -->
+			</section> <!-- /.Rcent-Causes-Section -->
+			
+	{% endfor %}
+	
+{% endblock %}

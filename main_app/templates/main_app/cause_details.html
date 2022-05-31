@@ -1,0 +1,100 @@
+{% extends 'main_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+	{% for companyData in companyDetails %}
+
+		{% for cause in ourCause %}
+
+			<!-- Theme Inner Banner ____________________________ -->
+			<section>
+				<div class="Theme-Inner-Banner inner-banner-bg-img-one">
+					<div class="banner-opacity">
+						<div class="container">
+							<div class="banner-content">
+								<h1>Cause</h1>
+								<p>{{cause.title}}</p>
+								<ul>
+									<li><a href="{% url 'mainAppNamespace:HomeName' %}">Accueil</a></li>
+									<li><span>-</span></li>
+									<li><a href="#">Details</a></li>
+								</ul>
+							</div> <!-- /.banner-content -->
+						</div> <!-- /.container -->
+					</div> <!-- /.banner-opacity -->
+				</div> <!-- /.Theme-Inner-Banner -->
+			</section>
+
+			<!-- Causes Sidebar ____________________________ -->
+			<section class="">
+				<div class="container">
+					<div class="Rcent-Causes-Item-Wrapper Causes-Details-Wrapper">
+						<div class="row">
+							<div class="col-md-10 col-xs-12 margin-top">
+								<div class="Causes-Item Causes-Details-Item clear-fix">
+									<div class="Causes-Img"><img src="{{cause.image.url}}" alt="image"></div> <!-- /.Causes-Img -->
+									<div class="Causes-Text">
+										<ul class="ul-One">
+											<li> But </li>
+											<li>
+												<div class="donate-piechart tran3s">
+									                <div class="piechart"  data-border-color="rgba(253,88,11,1)" data-value=".{{cause.percentage_of_goal_reached}}">
+													  <span>.{{cause.percentage_of_goal_reached}}</span>
+													</div>
+									            </div> <!-- /.donate-piechart -->
+											</li>
+											<li>atteint</li>
+										</ul>
+										<a href="{% url 'mainAppNamespace:DonateName' %}?cause={{cause.slug}}">FAIRE UN DON</a>
+										<ul class="count-down">
+											<li>
+												<span>{{cause.number_of_projects}}</span>
+												<p>Projets</p>
+											</li>
+											<li>
+												<span>{{cause.number_of_participants}}</span>
+												<p>Participants</p>
+											</li>
+											<li>
+												<span>{{cause.number_of_partners}}</span>
+												<p>Partenaires</p>
+											</li>
+											<li>
+												<span>{{cause.number_of_donations}}</span>
+												<p>Dons</p>
+											</li>
+										</ul>
+									</div> <!-- /.Causes-Text -->
+								</div> <!-- /.Causes-Item -->
+								<div class="Details-Info">
+									<h3> {{cause.title}} </h3>
+									<!-- <ul class="info-list-one">
+										<li>July 8, 2017</li>
+										<li>7 Comment</li>
+										<li>Post By : Riad</li>
+									</ul> -->
+									<p>{{cause.description | safe}}</p>
+									<div class="Details-Info-Slide">
+										<div id="Details-Slider" class="owl-carousel owl-theme">
+											{% for image in causeImagesGallery %}
+												<div class="item cause-gallery-image"><img src="{{image.image.url}}" alt="image"></div><!-- /.item -->
+											{% endfor %}
+										</div> <!-- /#Details-Slider -->
+									</div> <!-- /.Details-Info-Slide -->
+
+								</div> <!-- /.Details-Info -->
+
+							</div> <!-- /.col -->
+
+						</div> <!-- /.row -->
+					</div> <!-- /.Rcent-Causes-Item-Wrapper -->
+				</div> <!-- /.container -->
+			</section> <!-- /.Rcent-Causes-Section -->
+			
+		{% endfor %}
+
+	{% endfor %}
+	
+{% endblock %}

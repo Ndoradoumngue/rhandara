@@ -1,0 +1,56 @@
+{% extends 'main_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+	{% for companyData in companyDetails %}
+
+		{% for event in eventData %}
+
+			<!-- Theme Inner Banner ____________________________ -->
+			<section>
+				<div class="Theme-Inner-Banner inner-banner-bg-img-one">
+					<div class="banner-opacity">
+						<div class="container">
+							<div class="banner-content">
+								<h1>S'inscrire A Un Evénement</h1>
+								<p>{{event.title}}</p>
+								<ul>
+									<li><a href="{% url 'mainAppNamespace:HomeName' %}">Accueil</a></li>
+									<li><span>-</span></li>
+									<li><a href="#"> S'inscrire A Un Evénement </a></li>
+								</ul>
+							</div> <!-- /.banner-content -->
+						</div> <!-- /.container -->
+					</div> <!-- /.banner-opacity -->
+				</div> <!-- /.Theme-Inner-Banner -->
+			</section>
+
+			<!-- Join Volunteer ____________________________ -->
+			<section class="Join-Volunteer-Pages">
+				<div class="container">
+					<div class="Theme-title text-center">
+						<h2> {{event.title}} </h2>
+						<h6> S'inscrire </h6>
+					</div>
+					<form action="" method="post">
+                    {% csrf_token %}
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="single-textarea">
+									<textarea placeholder="Veuillez laisser un message ...." name="message"></textarea>
+								</div> <!-- /.single-textarea -->
+							</div> <!-- /.col -->
+						</div> <!-- /.row -->
+						<button class="hvr-float-shadow">S'inscrire</button>
+						<br/><br/>
+					</form> <!-- /Form -->
+				</div> <!-- /.container -->
+			</section> <!-- /.Join-Volunteer-Pages -->
+
+		{% endfor %}
+			
+	{% endfor %}
+	
+{% endblock %}

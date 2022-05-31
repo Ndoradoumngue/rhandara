@@ -1,0 +1,52 @@
+{% extends 'main_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+	{% for companyData in companyDetails %}
+
+			<!-- Theme Inner Banner ____________________________ -->
+			<section>
+				<div class="Theme-Inner-Banner inner-banner-bg-img-one">
+					<div class="banner-opacity">
+						<div class="container">
+							<div class="banner-content">
+								<h1>Notre Présence</h1>
+								<p>Nos pays d'opération ({{numberOfOurCountriesOfOperation}} pays)</p>
+								<ul>
+									<li><a href="{% url 'mainAppNamespace:HomeName' %}">Accueil</a></li>
+									<li><span>-</span></li>
+									<li><a href="#">Notre Présence</a></li>
+								</ul>
+							</div> <!-- /.banner-content -->
+						</div> <!-- /.container -->
+					</div> <!-- /.banner-opacity -->
+				</div> <!-- /.Theme-Inner-Banner -->
+			</section>
+			
+			<!-- Children Care List  _________________________________ -->
+			<section class="Children-Care-list-margin margin-top">
+				<div class="container">
+					<div class="Children-Care-list">
+						<div id="Children-Care-List-Slider" class="owl-carousel owl-theme">
+							
+							{% for country in ourCountryOfOperations %}
+
+								<div class="item">
+									<div class="text-center list-item">
+										<img src="{{country.flag.url}}">
+										<h6 style="padding-top: 20px !important;"><a href="#">{{country.country_name}}</a></h6>
+									</div> <!-- /.list-item -->
+								</div> <!-- /.item -->
+							
+							{% endfor %}
+
+						</div> <!-- / #Children-Care-List-Slider -->
+					</div> <!-- /.Children-Care-list -->
+				</div> <!-- /.container -->
+			</section> <!-- /.Children-Care-list-margin -->
+
+	{% endfor %}
+	
+{% endblock %}

@@ -1,0 +1,176 @@
+{% extends 'main_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+	{% for companyData in companyDetails %}
+
+      <div class="jumbotron jumbotron-fluid" data-center="background-size: 100%;"
+         data-top-bottom="background-size: 110%;">
+         <div class="container" >
+            <div class="jumbo-heading" data-aos="fade-up">
+            <!-- jumbo-heading -->
+               <h1>Nos domaines</h1>
+               <!-- Breadcrumbs -->
+               <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                     <li class="breadcrumb-item"><a href="{% url 'mainAppNamespace:HomeName' %}">Accueil</a></li>
+                     <li class="breadcrumb-item active" aria-current="page">Nos domaines</li>
+                  </ol>
+               </nav>
+               <!-- /breadcrumb -->
+            </div>
+            <!-- /jumbo-heading -->
+         </div>
+         <!-- /container -->
+      </div>
+      <!-- /jumbotron -->
+      <!-- ==== Page Content ==== -->
+      <div class="page container">
+         <div class="row">
+            <!-- page  starts -->
+            <div class="col-lg-12">
+
+               <div class="row mt-5">
+
+                  {% for service in ourServicesListFirstRow %}
+
+                     <!-- service-box 1 -->
+                     <div class="serviceBox1 bg-primary pattern3 col-lg-3" style="margin-left: 50px !important;">
+                        <div class="service-content bg-light">
+                           <!-- image -->
+                           <div class="service-icon">
+                              <img src="{{service.image.url}}" class="img-fluid rounded-circle" alt=""/>
+                           </div>
+                           <!-- title -->
+                           <h3 class="title"><a href="{% url 'mainAppNamespace:ServiceDetailsName' service_slug=service.slug %}" style="font-size: 1.1rem !important;">{{service.title}}</a></h3>
+                           <!-- /description -->
+                           <p class="description">
+                              {{service.short_description}} ...
+                           </p>
+                           <!-- /description -->
+                        </div>
+                        <!-- button -->
+                        <div class="text-center">
+                           <a class="btn btn-secondary" href="{% url 'mainAppNamespace:ServiceDetailsName' service_slug=service.slug %}">Lire Plus</a>
+                        </div>
+                     </div>
+                     <!-- /serviceBox-->
+
+                  {% endfor %}
+
+               </div>
+               <!--/row ends -->
+
+               <div class="row mt-5">
+
+                  {% for service in ourServicesListFirstRow %}
+
+                     <!-- service-box 1 -->
+                     <div class="serviceBox1 bg-primary pattern3 col-lg-3" style="margin-left: 50px !important;">
+                        <div class="service-content bg-light">
+                           <!-- image -->
+                           <div class="service-icon">
+                              <img src="{{service.image.url}}" class="img-fluid rounded-circle" alt=""/>
+                           </div>
+                           <!-- title -->
+                           <h3 class="title"><a href="{% url 'mainAppNamespace:ServiceDetailsName' service_slug=service.slug %}" style="font-size: 1.1rem !important;">{{service.title}}</a></h3>
+                           <!-- /description -->
+                           <p class="description">
+                              {{service.short_description}} ...
+                           </p>
+                           <!-- /description -->
+                        </div>
+                        <!-- button -->
+                        <div class="text-center">
+                           <a class="btn btn-secondary" href="{% url 'mainAppNamespace:ServiceDetailsName' service_slug=service.slug %}">Lire Plus</a>
+                        </div>
+                     </div>
+                     <!-- /serviceBox-->
+
+                  {% endfor %}
+
+               </div>
+               <!--/row ends -->
+
+               <div class="row mt-5">
+
+                  {% for service in ourServicesListFirstRow %}
+
+                     <!-- service-box 1 -->
+                     <div class="serviceBox1 bg-primary pattern3 col-lg-3" style="margin-left: 50px !important;">
+                        <div class="service-content bg-light">
+                           <!-- image -->
+                           <div class="service-icon">
+                              <img src="{{service.image.url}}" class="img-fluid rounded-circle" alt=""/>
+                           </div>
+                           <!-- title -->
+                           <h3 class="title"><a href="{% url 'mainAppNamespace:ServiceDetailsName' service_slug=service.slug %}" style="font-size: 1.1rem !important;">{{service.title}}</a></h3>
+                           <!-- /description -->
+                           <p class="description">
+                              {{service.short_description}} ...
+                           </p>
+                           <!-- /description -->
+                        </div>
+                        <!-- button -->
+                        <div class="text-center">
+                           <a class="btn btn-secondary" href="{% url 'mainAppNamespace:ServiceDetailsName' service_slug=service.slug %}" style="background-color: #018AE0 !important;">Lire Plus</a>
+                        </div>
+                     </div>
+                     <!-- /serviceBox-->
+
+                  {% endfor %}
+
+               </div>
+               <!--/row ends -->
+
+               {% if ourServicesList.has_other_pages %}
+
+                  <div class="col-md-12 mt-5">
+                     <!-- pagination -->
+
+                     <ul class="pagination">
+
+                        {% if ourServicesList.has_previous %}
+                           <li class="page-item">
+                              <a href="?page={{ ourServicesList.previous_page_number }}" class="page-link" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                              </a>
+                           </li>
+                        {% endif %}
+
+                        {% for i in ourServicesList.paginator.page_range %}
+                           {% if ourServicesList.number == i %}
+                              <li class="page-item"><a class="page-link active" href="#">{{ i }}</a></li>
+                           {% else %}
+                              <li class="page-item"><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
+                           {% endif %}
+                        {% endfor %}
+
+                        {% if ourServicesList.has_next %}
+
+                           <li class="page-item">
+                              <a href="?page={{ ourServicesList.next_page_number }}" class="page-link" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                              </a>
+                           </li>
+
+                        {% endif %}
+
+                     </ul>
+
+                  </div>
+
+               {% endif %}
+
+               <!-- /col-md -->
+            </div>
+            <!-- /col-lg-12 -->
+         </div>
+         <!-- /row -->
+      </div>
+
+	{% endfor %}
+
+{% endblock %}

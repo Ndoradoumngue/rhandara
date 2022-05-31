@@ -1,0 +1,63 @@
+{% extends 'main_app/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+	{% for companyData in companyDetails %}
+
+		{% for service in requestedService %}
+
+			<!-- Jumbotron -->
+			<div class="jumbotron jumbotron-fluid" data-center="background-size: 100%;"
+			   data-top-bottom="background-size: 110%;">
+			   <div class="container" >
+			      <!-- jumbo-heading -->
+			      <div class="jumbo-heading" data-aos="fade-up">
+			         <h1>Service</h1>
+			         <!-- Breadcrumbs -->
+			         <nav aria-label="breadcrumb">
+			            <ol class="breadcrumb">
+			               <li class="breadcrumb-item"><a href="{% url 'mainAppNamespace:AboutUsName' %}">Accueil</a></li>
+			               <li class="breadcrumb-item active" aria-current="page">Service</li>
+			            </ol>
+			         </nav>
+			         <!-- /breadcrumb -->
+			      </div>
+			      <!-- /jumbo-heading -->
+			   </div>
+			   <!-- /container -->
+			</div>
+			<!-- /jumbotron -->
+			<!-- ==== Page Content ==== -->
+			<div class="page container">
+			   <div class="row">
+			      <!-- page with sidebar starts -->
+			      <div class="col-lg-12 page-with-sidebar">
+			         <h2>{{service.title}}</h2>
+			         <!-- <span class="h7 mt-2">Since 1995 helping to find loving homes for Dogs and Cats</span> -->
+			         <!-- divider -->
+			         <hr class="small-divider left">
+			         <div class="row">
+			            <div class="col-xl-6 ">
+			               <p class="mt-4 res-margin">{{service.description | safe}}</p>
+			            </div>
+			            <!-- /col-xl -->
+			            <div class="col-xl-6 ">
+			               <!-- image -->
+			               <img class="img-fluid rounded" src="{{service.image.url}}" alt="">
+			            </div>
+			            <!-- /col-xl -->
+			         </div>
+			         <!-- /row -->
+			      </div>
+			      <!-- /page-with-sidebar -->
+			  </div>
+			   <!-- /row -->
+			</div>
+
+		{% endfor %}
+
+	{% endfor %}
+
+{% endblock %}

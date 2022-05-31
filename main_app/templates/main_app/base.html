@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author-name" content="Bakuri Technologies">
+    <meta name="author-email" content="contact@bakuritechnologies.com">
+    <meta name="author-profile" content="https://bakuritechnologies.com">
+    <meta name="description" content="{{pageDescription}}">
+    <meta name="keywords" content="{{pageKeywords}}">
+
+    <title>{{title}}</title>
+
+    {% load static %}
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{% static 'main_app/img/favicon.png' %}" type="image/x-icon">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="{% static 'main_app/css/bootstrap.min.css' %}">
+    <!-- icofont -->
+    <link rel="stylesheet" href="{% static 'main_app/css/fontawesome.5.7.2.css' %}">
+    <!-- flaticon -->
+    <link rel="stylesheet" href="{% static 'main_app/css/flaticon.css' %}">
+    <!-- animate.css -->
+    <link rel="stylesheet" href="{% static 'main_app/css/animate.css' %}">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="{% static 'main_app/css/owl.carousel.min.css' %}">
+    <!-- magnific popup -->
+    <link rel="stylesheet" href="{% static 'main_app/css/magnific-popup.css' %}">
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="{% static 'main_app/css/style.css' %}">
+    <!-- responsive -->
+    <link rel="stylesheet" href="{% static 'main_app/css/responsive.css' %}">
+</head>
+
+<body>
+
+    {% for data in companyDetails %}
+    
+    <!-- navbar area start -->
+    <nav class="navbar navbar-area navbar-expand-lg nav-absolute white nav-style-01 header-style-09">
+        <div class="container nav-container">
+            <div class="responsive-mobile-menu">
+
+                {% if messages %}
+
+                  <div class="messages" style="text-align: center !important;">
+                    {% for msg in messages %}
+
+                    <div class="alert alert-{{msg.level_tag}}" role="alert">
+                      {{msg.message}}
+                    </div>
+
+                    {% endfor %}
+                  </div>
+
+                {% endif %}
+
+                <div class="logo-wrapper">
+                    <a href="{% url 'mainAppNamespace:HomeName' %}" class="logo">
+                        <img src="{% static 'main_app/img/logo.png' %}" alt="logo">
+                    </a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#appside_main_menu" 
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>            
+
+            <div class="collapse navbar-collapse" id="appside_main_menu">
+                <ul class="navbar-nav">
+                    <li class="current-menu-item">
+                        <a href="{% url 'mainAppNamespace:HomeName' %}">Accueil</a>
+                    </li>
+                    <li><a href="#about">A Propos</a></li>
+                    <li><a href="#product">Produits</a></li>
+                    <li><a href="#advantages">Avantages</a></li>
+                    <li><a href="#partnership">Partenariat</a></li>
+                    <!-- <li><a href="#team">Notre Equipe</a></li> -->
+                    <!-- <li class="menu-item-has-children">
+                        <a href="#">Blog</a>
+                        <ul class="sub-menu">
+                            <li><a href="blog.html">Blog 01</a></li>
+                            <li><a href="blog-details.html">Blog Details</a></li>
+                        </ul>
+                    </li> -->
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="nav-right-content">
+                <ul>
+                    <li class="button-wrapper">
+                        <a href="#contact" class="boxed-btn">Vendre</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- navbar area end -->
+
+    <!-- header area start  -->
+    <header class="header-area header-bg-9 style-09" id="home">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-7">
+                    <div class="header-inner">
+                        <h1 class="title wow fadeInDown">{{data.slogan}}</h1>
+                        <p>{{data.short_description | safe}}</p>
+                        <div class="btn-wrapper wow fadeInUp">
+                            <a href="#" class="boxed-btn-02 reverse-color" onclick="information()"><i class="flaticon-apple-1"></i> App Store</a>
+                            <a href="#" class="boxed-btn-02 blank" onclick="information()"><i class="flaticon-android-logo"></i> Play Store</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="right-img">
+                        <div class="img-wrapper">
+                            <img src="{% static 'main_app/img/header-right-image.png' %}" alt="header right image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header area end  -->
+
+    <!-- video area start -->
+    <section class="video-area" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="img-with-video">
+                        <div class="img-wrap">
+                            <img src="{{data.about_image.url}}" alt="">
+                            <div class="hover">
+                                <a href="https://youtu.be/uSISpKfGmsg" class="video-play-btn mfp-iframe"><i class="fas fa-play"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="right-content-area">
+                        <span class="subtitle">Qui sommes-nous?</span>
+                        <h3 class="title">Rhandara</h3>
+                        {{data.company_description | safe}}
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <br/><br/>
+                    <div class="small-title">
+                        <!-- L'equipe -->
+                    </div>
+                    <br/><br/>
+                    <div class="team-carousel"><!-- team carousel -->
+
+                        {% for member in ourTeam %}
+
+                            <div class="single-team-member "><!-- single team member -->
+                                <div class="thumb">
+                                    <img src="{{member.profile_image.url}}" alt="{{member.first_name}} {{member.last_name}}">
+                                    <div class="hover">
+                                        <ul class="social-icon">
+                                            <li><a href="{{member.facebook_profile_link}}"><i class="fab fa-facebook-f"></i></a></li>
+                                            <li><a href="{{member.twitter_profile_link}}"><i class="fab fa-twitter"></i></a></li>
+                                            <li><a href="{{member.linkedin_profile_link}}"><i class="fab fa-linkedin-in"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <h4 class="title">{{member.first_name}} {{member.last_name}}</h4>
+                                    <span class="post">{{member.role_in_company}}</span>
+                                </div>
+                            </div><!-- //. single team member -->
+
+                        {% endfor %}
+
+                    </div><!-- //. team carousel -->
+                </div>
+        
+            </div>
+        </div>
+    </section>
+    <!-- video area end -->    
+
+    <!-- why choose area start -->
+    <section class="why-choose-area why-choose-us-bg" id="product" style="margin-top: 100px !important;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="section-title white"><!-- section title -->
+                        <!-- <span class="subtitle">Pourquoi utiliser Rhandara?</span> -->
+                        <h3 class="title extra">Nos Produits</h3>
+                        <!-- <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor  tempor incididunt ut labore dolore magna.</p> -->
+                    </div><!-- //. section title -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-12">
+                    <div class="single-why-us-item margin-top-60 wow zoomIn"><!-- single why us item -->
+                        <!-- <div class="icon gdbg-1">
+                            <i class="flaticon-settings-1"></i>
+                        </div> -->
+                        <div class="content" style="text-align: center !important;">
+                            <i style="color: #e63946 !important; font-size: 2rem !important; background-color: #fff !important; padding: 15px !important; border-radius: 50% !important;" class="fa fa-taxi"></i>
+                            <h4 class="title"><br/>Taxi</h4>
+                            <p>Commandez un taxi à tout moment en envoyant simplement un message WhatsApp.</p>
+                        </div>
+                    </div><!-- //. single why us item -->
+                    <div class="single-why-us-item wow zoomIn"><!-- single why us item -->
+                        <!-- <div class="icon gdbg-2">
+                            <i class="flaticon-checked"></i>
+                        </div> -->
+                        <div class="content centered" style="text-align: center !important;">
+                            <i style="color: #e63946 !important; font-size: 2rem !important; background-color: #fff !important; padding: 15px !important; border-radius: 50% !important;" class="fa fa-motorcycle"></i>
+                            <h4 class="title"><br/>Clando</h4>
+                            <p>Commandez un moto-taxi (clando) à tout moment en envoyant simplement un message WhatsApp.</p>
+                        </div>
+                    </div><!-- //. single why us item -->
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="center-image">
+                        <img src="{% static 'main_app/img/mobile-img-2.png' %}" alt="mobile image two">
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="single-why-us-item margin-top-60 wow zoomIn"><!-- single why us item -->
+                        <!-- <div class="icon gdbg-3">
+                            <i class="flaticon-chat-1"></i>
+                        </div> -->
+                        <div class="content centered" style="text-align: center !important;">
+                            <i style="color: #e63946 !important; font-size: 2rem !important; background-color: #fff !important; padding: 15px !important; border-radius: 50% !important;" class="fa fa-tint"></i>
+                            <h4 class="title"><br/>Restauration</h4>
+                            <p>Commandez de la nourriture de n'importe où en envoyant un message WhatsApp. Nous vous enverrons des photos d'une grande variété de plats parmi lesquels choisir.</p>
+                        </div>
+                    </div><!-- //. single why us item -->
+                    <div class="single-why-us-item wow zoomIn"><!-- single why us item -->
+                        <!-- <div class="icon gdbg-4">
+                            <i class="flaticon-cloud"></i>
+                        </div> -->
+                        <div class="content centered" style="text-align: center !important;">
+                            <i style="color: #e63946 !important; font-size: 2rem !important; background-color: #fff !important; padding: 15px !important; border-radius: 50% !important;" class="fa fa-shopping-basket"></i>
+                            <h4 class="title"><br/>Achat Général</h4>
+                            <p>Commandez des habits, chaussures et autres articles de n'importe où en envoyant un message WhatsApp.</p>
+                        </div>
+                    </div><!-- //. single why us item -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- why choose area end -->
+
+    <div class="about-app-area padding-top-120" id="advantages" style="background-image:url({% static 'main_app/img/bg/about-app-area-bg.png' %});">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <h3 class="title">Avantages</h3>
+                    <br/>
+
+                    <ul class="feature-list style-03">
+                        <li class="single-feature-list">
+                            <div style="color: #1c144e !important; font-size: 2.5rem !important;">
+                                <i class="fa fa-filter"></i>
+                            </div>
+                            <div class="content">
+                                <h4 class="title"><a href="#">Tout en un</a></h4>
+                                <p>Rhandara vous permet de commander des produits à partir d'applications de messagerie instantanée de tous les jours. </p>
+                            </div>
+                        </li>
+                        <li class="single-feature-list">
+                            <div style="color: #1c144e !important; font-size: 2.5rem !important;">
+                                <i class="fa fa-lock"></i>
+                            </div>
+                            <div class="content">
+                                <h4 class="title"><a href="#">Sécurité</a></h4>
+                                <p>Tous nos partenaires sont contrôlés et nous nous engageons à maintenir une bonne relation client-vendeurs. Profitez de la sécurité dans toutes vos commandes. </p>
+                            </div>
+                        </li>
+                        <li class="single-feature-list">
+                            <div style="color: #1c144e !important; font-size: 2.5rem !important;">
+                                <i class="fa fa-fighter-jet"></i>   
+                            </div>
+                            <div class="content">
+                                <h4 class="title"><a href="#">Rapidité</a></h4>
+                                <p>Nous capitalisons sur la rapidité et veillons à ce que toutes vos commandes vous parviennent à temps. </p>
+                            </div>
+                        </li>
+                        <li class="single-feature-list">
+                            <div style="color: #1c144e !important; font-size: 2.5rem !important;">
+                                <i class="fa fa-thumbs-up"></i>
+                            </div>
+                            <div class="content">
+                                <h4 class="title"><a href="#">Amusant </a></h4>
+                                <p>Discutez avec notre plate-forme à tout moment et découvrez les produits intéressants que vous pouvez envisager d'acheter.  </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ <!-- testimonial-two-area start  -->
+ <div class="testimonial-area-two padding-top-120 gray-bg padding-bottom-120" id="partnership">
+     <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="section-title"><!-- section title -->
+                    <span class="subtitle">Partenariat</span>
+                    <h3 class="title extra">Vendre sur Rhandara</h3>
+                    <!-- <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor  tempor incididunt ut labore dolore magna.</p> -->
+                </div><!-- / /. section title -->
+            </div>
+        </div>
+     </div>
+     <div class="call-to-action-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="call-to-action-inner-style-02">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-11">
+                                    <p style="font-size: 18px; color: #fff; line-height: 1.8;">
+                                        Augmentez vos ventes en vendant sur Rhandara. Notre interface de messagerie et notre intégration complète avec les services de messagerie instantanée comme Whatsapp et Messenger vous permettent d'allier loisirs et commerce. Fini les années où vous deviez envoyer des photos et répondre aux mêmes questions de vos clients toute la journée. Confiez-nous la partie ennuyeuse de votre entreprise et concentrez-vous sur l'essentiel : les commandes.
+                                    </p>
+                                    <div class="btn-wrapper wow fadeInUp">
+                                        <!-- <a href="#" class="boxed-btn-02 reverse-color"><i class="flaticon-apple-1"></i> App Store</a> -->
+                                        <a href="#contact" class="boxed-btn-02 blank"><!-- <i class="flaticon-android-logo"></i> --> En Savoir Plus</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+ </div>
+ <!-- testimonial-two-area end  -->
+
+<!-- contact form area start  -->
+<div class="contact-form-area-02 contact-bg padding-bottom-120 padding-top-120" id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                    <div class="contact-area-wrapper" id="contact"><!-- contact area wrapper -->
+                        <!-- <span class="subtitle">Contact us</span> -->
+                        <h3 class="title">Nous Contacter</h3>
+                        <p>Avez-vous des suggestions, des plaintes ou souhaitez-vous simplement nous encourager? Envoie-nous un message.</p>
+                        <form action="{% url 'mainAppNamespace:ContactName' %}" class="contact-form sec-margin" method="post"> {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="full_name" placeholder="Nom Complet" required="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="email" placeholder="Addresse Email" required="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="phone" placeholder="Numéro de téléphone">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="subject" placeholder="Sujet">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group textarea">
+                                        <textarea name="message" class="form-control" cols="30" rows="10" placeholder="Message" required=""></textarea>
+                                    </div>
+                                    <button class="submit-btn-02" type="submit">Envoyer</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div><!-- //. contact area wrapper -->
+                </div>
+            <div class="col-lg-6">
+                <div class="img-wrapper">
+                    <img src="{% static 'main_app/img/contact-mobile.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- contact form area end -->
+
+<!-- footer area start -->
+<footer class="footer-area style-02 bg-blue">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget about_widget">
+                        <a href="{% url 'mainAppNamespace:HomeName' %}" class="footer-logo"><img src="{% static 'main_app/img/logo.png' %}" alt=""></a>
+                        <p> {{data.short_description | safe}} </p>
+                        <ul class="social-icon">
+                            <li style="border: 1px solid #fff; border-radius: 50%; padding: 10px; padding-right: 15px; padding-left: 15px;"><a href="{{data.facebook_profile_link}}"><i class="fab fa-facebook-f"></i></a></li>
+                            <li style="border: 1px solid #fff; border-radius: 50%; padding: 10px; padding-right: 12px; padding-left: 12px;"><a href="{{data.twitter_profile_link}}"><i class="fab fa-twitter"></i></a></li>
+                            <li style="border: 1px solid #fff; border-radius: 50%; padding: 10px; padding-right: 12px; padding-left: 12px;"><a href="{{data.linkedin_profile_link}}"><i class="fab fa-linkedin-in"></i></a></li>
+                            <!-- <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget nav_menus_widget">
+                        <h4 class="widget-title">Liens Utiles</h4>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-envelope"></i> {{data.email}}</a></li>
+                            <li><a href="#about"><i class="fas fa-phone"></i> {{data.tel1}}</a></li>
+                            <li><a href="#product"><i class="fas fa-home"></i> {{data.address}}, {{data.town.town_name}}, {{data.country.country_name}}</a></li>
+                            <!-- <li><a href="#advantages"><i class="fas fa-chevron-right"></i> Nos avantages</a></li>
+                            <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget nav_menus_widget">
+                        <h4 class="widget-title">Besoin d'aide?</h4>
+                        <ul>
+                            <li><a href="#contact"><i class="fas fa-chevron-right"></i> Question-Réponse</a></li>
+                            <li><a href="#contact"><i class="fas fa-chevron-right"></i> Termes & Conditions</a></li>
+                            <!-- <li><a href="#"><i class="fas fa-chevron-right"></i> Policy</a></li> -->
+                            <li><a href="#contact"><i class="fas fa-chevron-right"></i> Support</a></li>
+                            <!-- <li><a href="#"><i class="fas fa-chevron-right"></i> Temrs</a></li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget nav_menus_widget">
+                        <h4 class="widget-title">Télécharger</h4>
+                        <ul>
+                            <li><a href="#" onclick="information()"><i class="fas fa-chevron-right"></i> Sur IOS</a></li>
+                            <li><a href="#" onclick="information()"><i class="fas fa-chevron-right"></i> Sur Android</a></li>
+                            <!-- <li><a href="#"><i class="fas fa-chevron-right"></i> For Mac</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> For Window</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> For Linux</a></li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright-area"><!-- copyright area -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="copyright-inner"><!-- copyright inner wrapper -->
+                        <div class="left-content-area"><!-- left content area -->
+                            Déployé par <a href="https://bakuritechnologies.com" style="color: #0056b3 !important;">Bakuri Technologies</a>
+                        </div><!-- //. left content aera -->
+                        <!-- <div class="right-content-area"><-- right content area --
+                            Designed by <strong>Love</strong>
+                        </div> --><!-- //. right content area -->
+                    </div><!-- //.copyright inner wrapper -->
+                </div>
+            </div>
+        </div>
+    </div><!-- //. copyright area -->
+</footer>
+<!-- footer area end -->
+
+{% endfor %}
+
+<!-- preloader area start -->
+<div class="preloader-wrapper" id="preloader">
+    <div class="preloader" >
+        <div class="sk-circle">
+            <div class="sk-circle1 sk-child"></div>
+            <div class="sk-circle2 sk-child"></div>
+            <div class="sk-circle3 sk-child"></div>
+            <div class="sk-circle4 sk-child"></div>
+            <div class="sk-circle5 sk-child"></div>
+            <div class="sk-circle6 sk-child"></div>
+            <div class="sk-circle7 sk-child"></div>
+            <div class="sk-circle8 sk-child"></div>
+            <div class="sk-circle9 sk-child"></div>
+            <div class="sk-circle10 sk-child"></div>
+            <div class="sk-circle11 sk-child"></div>
+            <div class="sk-circle12 sk-child"></div>
+        </div>
+    </div>
+</div>
+
+  <!-- preloader area end -->
+
+  <!-- back to top area start -->
+  <div class="back-to-top">
+        <i class="fas fa-angle-up"></i>
+  </div>
+  <!-- back to top area end -->
+
+    <!-- jquery -->
+    <script src="{% static 'main_app/js/jquery.js' %}"></script>
+    <script src="{% static 'main_app/js/sweetalert2.all.min.js' %}"></script>
+    <!-- popper -->
+    <script src="{% static 'main_app/js/popper.min.js' %}"></script>
+    <!-- bootstrap -->
+    <script src="{% static 'main_app/js/bootstrap.min.js' %}"></script>
+    <!-- owl carousel -->
+    <script src="{% static 'main_app/js/owl.carousel.min.js' %}"></script>
+    <!-- magnific popup -->
+    <script src="{% static 'main_app/js/jquery.magnific-popup.js' %}"></script>
+    <!-- contact js-->
+    <script src="{% static 'main_app/js/contact.js' %}"></script>
+    <!-- wow js-->
+    <script src="{% static 'main_app/js/wow.min.js' %}"></script>
+    <!-- way points js-->
+    <script src="{% static 'main_app/js/waypoints.min.js' %}"></script>
+    <!-- counterup js-->
+    <script src="{% static 'main_app/js/jquery.counterup.min.js' %}"></script>
+    <!-- main -->
+    <script src="{% static 'main_app/js/main.js' %}"></script>
+
+    <script type="text/javascript">
+
+        function information() {
+            swal.fire(
+              'Utilisation!',
+              'Nos applications mobiles sont en cours de développement. Vous pouvez utiliser notre platforme whatsapp. Envoyez le message "join judge-airplane" par whatsapp au numéro +1 415 523 8886 pour commencer.',
+              'info'
+            )
+        }
+    </script>
+</body>
+
+</html>

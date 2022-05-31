@@ -1,0 +1,60 @@
+{% extends 'main_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+	{% for companyData in companyDetails %}
+
+			<!-- Theme Inner Banner ____________________________ -->
+			<section>
+				<div class="Theme-Inner-Banner inner-banner-bg-img-one">
+					<div class="banner-opacity">
+						<div class="container">
+							<div class="banner-content">
+								<h1>Notre Equipe</h1>
+								<p>Une équipe dynamique prête à vous servir</p>
+								<ul>
+									<li><a href="{% url 'mainAppNamespace:HomeName' %}">Accueil</a></li>
+									<li><span>-</span></li>
+									<li><a href="#">Notre Equipe</a></li>
+								</ul>
+								<a href="#" class="hvr-bounce-to-right">Nous Rejoindre </a>
+							</div> <!-- /.banner-content -->
+						</div> <!-- /.container -->
+					</div> <!-- /.banner-opacity -->
+				</div> <!-- /.Theme-Inner-Banner -->
+			</section>
+
+			<!-- Team Pages ____________________________ -->
+			<section class="Team-Pages">
+				<div class="container">
+					<div class="row">
+						
+						{% for member in ourTeam %}
+
+							<div class="col-md-4 col-sm-6 col-xs-12">
+								<div class="Our-Team-Item">
+									<div class="Team-Img"><img src="{{member.profile_image.url}}" alt="image"></div><!-- /.Team-Img -->
+									<div class="Team-Text">
+										<h5>{{member.first_name}} {{member.last_name}}</h5>
+										<p>{{member.role_in_company}}</p>
+										<ul>
+											<li><a href="{{companyData.founder.facebook_profile_link}}"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+											<li><a href="{{companyData.founder.linkedin_profile_link}}"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+											<li><a href="{{companyData.founder.twitter_profile_link}}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+										</ul>
+									</div> <!-- /.Team-Text -->
+								</div> <!-- /.Our-Team-Item -->
+							</div> <!-- /.col -->
+
+						{% endfor %}
+
+					</div> <!-- /.row -->
+				</div> <!-- /.container -->
+			</section> <!-- /.Team-Pages -->
+			
+			
+	{% endfor %}
+
+{% endblock %}
